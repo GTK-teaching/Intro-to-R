@@ -1,0 +1,129 @@
+---
+title: "Basic R language syntax"
+author: "Greg Tucker-Kellogg"
+date: "January 21, 2019"
+source: Rmd
+output: 
+  html_document:
+    fig_caption: yes
+teaching: 10
+exercises: 5
+objectives:
+- "Use basic R syntax to create variables, inspect functions, and write functions"
+- "Understand the use of parameters in functions, including named parameters and default parameters"
+- "Distinguish basic R data types"
+questions:
+  - some question
+keypoints:
+  - "R objects like variables provide abstraction for R programming and data analysis"
+  - "R functions encapsulate capabilities that we can re-use over and over with different input   provided as arguments. "
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("../bin/chunk-options.R")
+```
+
+## Variables and assignment
+
+While R can be used as a fancy calculator, we often assign values to objects called *variables*, and refer to the variables later to retrieve the values.
+
+```{r}
+x <- 5
+x
+```
+
+After using the assignment operator `<-`, we can  use *x* instead of 5 throughout our script. 
+
+Variables create an *abstraction* that supports *reproducibility*. This has many immediate advantages, including: 
+
+1. Not having to 'hard-code' values in our scripts. This is especially important when a
+   single variable is referenced more than once in the script -- in that case, we only
+   need to change the initial value assigned to the variable instead of changing the value
+   everywhere in the script.
+2. Legibility. With good variable names, the script becomes more legible as it is apparent
+   to other readers what is being done/evaluated at each step of the script.
+
+> ## Object names in R
+>
+> **Rules**
+> 
+> There are a few rules that needs to be observed when naming variables and other R objects, namely:
+> 1. Variable names may contain numbers, but may not start with a number. `x2` is valid, `2x` is not.
+> 2. Variable names cannot contain mathematical symbols such as "+", "-","*", "/".
+> 3. Variable names are case-sensitive.
+> 4. Variable names that start with "." are hidden in the global environment (more on environments later)
+> 5. Some words are reserved by the language, and you cannot use them for an R object. For example, you cannot name an object `if`.
+>
+> **Conventions**
+> 
+> - Many R objects (variables and functions) have a `.` in the name, e.g., `foo.bar`. More recent convention is to separate multi-word object names with `_`, e.g., `foo_bar`.
+> - You *can* (but generally *should not*) give an object the same name as an existing object. For example, the combining function `c()` is one of the most commonly used functions in R; you can name an object `c`, but that would make it harder to use the `c()` function.
+{: .callout}
+
+## Functions
+
+Variables are not the only types of objects in R. One critical type of object is a function. Functions (usually) take arguments, and (usually) return values, which may be any type of object supported by the language (including functions). Let's take a function like `sqrt()`, which not surprisingly returns the square root of its argument.  The return value can be assigned to a variable or passed to another function.
+
+```{r}
+sqrt(2)
+```
+
+You might think that `sqrt()` would just take one number as an argument but in fact it can take a *vector* of numbers as an argument. We'll see vectors in the next section.
+
+```{r}
+# 1:10 is an R shorthand for the integers 1 to 10, inclusive.
+sqrt(1:10)
+# it won't work with things that aren't numbers
+sqrt("hello world")
+# and it recognises that negative numbers don't have a real square root.
+sqrt(-1)
+```
+
+### Function arguments
+
+Functions have arguments, and some of them have *many* arguments. To get the most out of a function, you need to be able to use its arguments properly.  Consider a function to round a number to a specific number of digits after the decimal.
+
+```{r}
+round(pi)
+round(pi,2)
+round(pi,digits=2)
+```
+
+**We already see** that `round()` can take an additional argument, called `digits`, that specifies how much rounding is requested.  The `digits` argument is optional. The behaviour above suggests how R handles such arguments:
+
+- We can pass the value of that argument by *position* (`digits` is the second argument of the `round()` definition)
+- We can pass the value of that argument by *name*, using the `=` operator.  Note that `<-` should not be used in the arguments of a function call.
+- If we leave out the second argument, `round()` *defaults* to zero places after the decimal.
+
+## Finding out about function arguments
+
+In addition to the usual `?` and `??` for help, or `help()`, you can also use the `args` function to find out just the arguments of a function. Args takes a function (or a function name) as an argument, and displays *its* arguments, e.g., 
+
+```{r}
+args(round)
+```
+
+> ## An exercise
+>
+> Assume the haploid human genome is 3.1Mb. The average molecular weight of a base pair is 660g/mol.  Estimate the weight of DNA in a human cell in picograms, rounded to three digits.
+>
+> > ## Solution
+> >
+> >
+> > ```{r}
+> > genome_length <- 3.1e9
+> > genome_bp <- 2*genome_length
+> > avogadros_number <- 6.02e23
+> > bp_moles <- genome_bp / avogadros_number
+> > grams <- bp_moles*660
+> > picograms <- grams*1e12
+> > round(picograms,3)
+> > ```
+> {: .solution}
+{: .challenge}
+
+
+
+
+{% include links.md %}

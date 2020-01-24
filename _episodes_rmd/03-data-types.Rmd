@@ -1,0 +1,318 @@
+---
+title: R data types
+teaching: 15
+exercises: 10
+source: Rmd
+questions: 
+- How is data represented in R?
+- How do we extract specific entries in R?
+objectives: 
+- Recognise and the different basic data types in R.
+- Be able to index and subset different classes of data in R. 
+- Be able to read in and explore data in data frames
+keypoints: 
+- Both data frames and matrices are two dimensional objects with rows and columns, but data frame columns can be of different types.
+- Subsetting can be done with [] or [[]] in R.
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("../bin/chunk-options.R")
+```
+## R data has types
+
+Objects in R represent data, and data comes in different types. The data type may by
+simple types, such as *numeric*, *logical*, *character*, etc., or complex types like data
+frames, lists, and sophisticated objects. In R, variable typing is dynamic: you don't have
+to specify the type of a variable before you assign a value to it. But the data type is
+important, because it determines what operations are valid: you can take the sum of
+numeric data, but not character data.
+
+## Atomic data types
+
+The simplest data in R is *atomic*, it cannot be broken down into smaller pieces of data. R has six atomic data types:
+
+logical 
+: Logical data is either `TRUE` or `FALSE`
+
+integer
+: integer data should be self explanatory, but numeric data is represented as real numbers unless you ask for it as integer. As far as R is concerned, `1` is  real number, but `1L` is an integer.
+
+numeric
+: numeric data is the default for real numbers. 
+
+complex
+: R supports complex numbers as a basic data type.
+
+character
+: a string, like "this is a string" is called "character" data. 
+
+raw
+: The "raw" type is not something we are likely to use.
+
+
+Most functions expect data to be of a certain type, but they may be written to handle different types. Remember `sqrt()`? It expects a real value as its argument, and expects to return a real value as a result. But if you want to deal with complex numbers, you can:
+
+```{r}
+sqrt(-1)
+# Try it with a complex number
+sqrt(as.complex(-1))
+```
+
+### Object classes in R
+
+All objects in R have an attribute called a "class", which affects how the object behaves. You can find the class of an object *foo* with `class(foo)`. You can even use class on simple numbers:
+
+```{r}
+class(1)
+class(1L)
+class(as.complex(1L))
+```
+
+### Vectors
+
+Perhaps more surprisingly, all data in R is actually stored as vectors. A simple number, for example, is a vector of
+length 1. So is a simple quoted string.  Try it!
+
+In our previous examples on classes, every result was preceeded by a `[1]`; that indicates the *index* of the first entry of the vector. 
+The index is shown even though the vector only has one element!
+If the vector were long enough to spill over multiple lines, the index of the first entry on each
+line would be indicated. For example, the integers from 1 to 100 (inclusive) can be
+represented by the convenient shorthand:
+
+```{r}
+x <- 1:100
+x
+```
+To access an element of a vector, use the index of the desired elements in square
+brackets, e.g., `x[10]` for the tenth element of `x`.  The first element of R objects is
+element 1.
+
+A vector contains data of a single basic data type. Basic data types in R include the
+following
+
+### A bit more about basic data types
+
+**Logical** data can only take on TRUE or FALSE values, and are commonly encountered when we test if a certain condition is fulfilled. For example: 
+
+```{r}
+5 > 4
+class(5 > 4)
+```
+
+The **numeric** data type is used for ordinary real numbers, including integers. You can
+also use the **integer** data type if the rare case where you know that's appropriate and
+useful. The default in R, however, is for numeric data to use the numeric data type, even if handed an
+integer. You can force the conversion with an "L" after the number, or by using `as.integer()`.
+
+~~~
+> x <- 3.14
+> class(x)
+[1] "numeric"
+> class(3)
+[1] "numeric"
+> class(3L)
+[1] "integer"
+> class(as.integer(3))
+[1] "integer"
+~~~
+{: .language-r}
+
+> ## Explicit and implicit conversion
+>
+>  Explicitly converting a real number to an integer **truncates**, rather than rounds. For example:
+> 
+> ```{r}
+> as.integer(3.6)
+> ```
+> 
+> This behavior is extremely important to bear in mind, as it defies common practice.
+> 
+> R will *implicitly* convert (coerce) data between different classes to try to Do The Right Thing.
+> For example, adding an integer to a numeric will promote the integer to a numeric, and
+> result in a numeric, even though adding two integers would result in an integer.
+> ~~~
+> > class(3L + 3L)
+> [1] "integer"
+> > class(3L + 3)
+> [1] "numeric"
+> ~~~
+> {: .language-r}
+>
+> A user can often force explicit conversion between different classes of data using the `as.*()`
+> functions. For example, we were able to convert a numeric value
+> to an integer using `as.integer()`. R will try to convert the class accordingly,
+> but where it cannot do so, will return you **NA** with a warning message. For example:
+>
+> ~~~
+>  > as.integer("TRUE")
+> [1] NA
+> Warning message:
+> NAs introduced by coercion 
+> ~~~
+> {: .language-r}
+> 
+> This conversion cannot be done because TRUE cannot be represented as a number. Instead,
+> R will convert it to NA.
+{: .warning}
+
+## Working with vectors
+
+### Creating vectors 
+
+Vectors can be created from elements by combining them using the `c()` function, which takes an arbitrary number of arguments and combines them into a vector. If they are of different types, it tries to coerce them into the same type. If it cannot coerce them, it throws an error. Coersion is often one-way: the number 1 can be coerced to the string "1", but the string "hello" cannot be coerced to a number. 
+
+
+```{r}
+# The number will be coerced to a string
+c("hello",1)
+# The string "hello" cannot be coerced to a number
+as.integer("hello",1)
+```
+
+## Lists
+
+Ordinary vectors in R can only contain simple data types, including the data types shown
+above, and the elements of an ordinary vector must all be of the same basic data type.
+*Lists* relax both these restrictions: a list can contain elements of any data type, even
+complex data types such as other lists, and the elements of a list can be of different
+data types. Each list element can be a different length. This allows for important and powerful abstractions.
+
+Suppose we have three character vectors, each containing the names of different types of organisms.
+
+
+```{r}
+birds <- c("myna","sparrow","swift","robin")
+insects <- c("cockroach","butterfly","caterpillar")
+mammals <- c("hamster","rat","human") 
+
+# Combine these into a list.
+animals <- list(birds, insects, mammals)
+animals
+```
+
+As you can see, each element of `animals` is a character vector. We can give them names:
+
+```{r}
+names(animals) <- c("birds", "insects", "mammals")
+animals
+
+```
+The addition of names to the elements of the list facilitates subsetting, which will be discussed later. Objects with named items function a lot like Python dictionaries.
+ 
+## Matrices
+
+A matrix is a two-dimensional vector that has rows and columns. Like vectors, all the
+entries in a matrix must be the same basic data type -- that is, either numeric, integer,
+logical or character. If there are more than one data type, R will simply convert
+everything to a compatible data type. A matrix can be created with the `matrix()` function
+which has the general usage as shown:
+
+```{r}
+args(matrix)
+```
+
+The `nrow` and `ncol` argument specifies the number of rows and columns respectively, while the `byrow` argument indicates if the matrix will be filled row-wise or column wise. The behavior of the byrow argument can be seen below: 
+
+
+```{r}
+matrix(1:20, nrow=2, ncol=10, byrow=TRUE)
+matrix(1:20, nrow=2, ncol=10, byrow=FALSE)
+```
+
+## Data frames
+
+A data frame is the data structure you will probably use more than any other. You can think of a data frame as a hybrid of a list an a matrix. Like a matrix, a data frame has both row and columns. But unlike a matrix, data frame columns can be of different types, and columns are often referred to by by names, like a list.  If you prefer, you can think of a data frame as a list of vectors, where *all elements of the have the same length. One can create a data frame using the `data.frame()`
+function, which has the usage
+
+```{r}
+args(data.frame)
+```
+
+
+For example, the following can be used to construct a data frame where we explicitly gave row names and column names to both rows and columns. 
+
+
+```{r}
+data.frame(Gender=c("male","female"),
+		       Count=c(10,5), 
+		       row.names=c("M","F"))
+```
+
+## Subsetting in R 
+
+How can we refer to subsets, or specific entries, of a vector, list, matrix or data frame? 
+
+In R, subsetting can be done using `[n]`, where *n* is the *n*-th entry that one wishes to extract. It is also worth noting that in R, the first entry starts from 1 and not zero like in other languages (such as *C*). For example, 
+
+```{r}
+demoVector <- 1:10
+demoVector[5] 
+
+```
+For 2 dimensional objects such as data frames and matrix, one will use `[m,n]` to extract the entry in the *m*-th row and *n*-th coumn of the array. 
+
+For example, consider the following data frame:
+
+```{r}
+df <- data.frame(A=1:10,B=11:20,C=21:30)
+df
+```
+
+A few operations of extraction are illustrated below.
+
+```{r}
+## Extract a single entry
+df[1,1]
+## Extract a row
+df[1,]
+## Extract a column as a vector
+df[,1]
+## Extract a column by name, still as a vector
+df[,"A"]
+## Extract a column by name, as a vector
+df[["A"]]
+## Extract a column by name, as a vector
+df$A
+## Extract a column by name, as a data frame!
+df['A'] 
+```
+
+
+> ## Subsetting your data frame
+>
+> Create your own data frame `df` similar to what we did above. Try out the extraction operations above. Now see if you can extract two columns instead of one. Hint: use the `c()` function.
+>
+> > ## Solution
+> >
+> > ```{r}
+> > df[c("A","B")]
+> > df[1:2]
+> > df[c(1,3)]
+> > ```
+> {: .solution}
+{: .challenge}
+
+> ## Working with list subsets and extractions
+>
+> Create an `animals` list as above. 
+> - How many ways can you successfully extract "butterfly" from this list? 
+> - Can you add an element to the insects without knowing the length? 
+>
+> > ## Solution
+> >
+> > ```{r}
+> > animals[[2]][2]
+> > animals$insects[2]
+> > animals[['insects']][2] 
+> > ## This one doesn't work? Why not?
+> > animals['insects'][2] 
+> > animals[['insects']] <- c(animals$insects, "honey bee")
+> > animals
+> > ```
+> {: .solution}
+{: .challenge}
+
+
+ {% include links.md %}

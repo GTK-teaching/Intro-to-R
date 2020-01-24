@@ -1,0 +1,103 @@
+---
+title: "R packages and the environment"
+author: "Greg Tucker-Kellogg"
+date: "January 21, 2019"
+source: Rmd
+output: 
+  html_document:
+    fig_caption: yes
+teaching: 5
+exercises: 5
+objectives:
+- "Be able to identify installed packages and install new packages in R"
+- "Distinguish between namespaces and packages"
+questions:
+  - some question
+keypoints:
+  - "R functions and objects are stored in packages"
+  - "A user has access to all objects in all installed packages"
+  - "Loading a package brings package objects into the user namespace, which is searched"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("../bin/chunk-options.R")
+```
+
+R is designed to allow you to work with data, but there are thousands of functions and objects available. How do you prevent conflicts? How do you limit yourself to just the ones you want. 
+
+> ## Your working environment
+>
+> Open up an R console and type `ls()`<kbd>Enter</kbd>. Examine the results. Now type `search()`<kbd>Enter</kbd>. Examine those results.
+>
+> > ## Solution
+> >
+> > ```{r}
+> > ls()
+> > search()
+> > ```
+> >
+> > Your results will likely differ from mine.
+> {: .solution}
+{: .challenge} 
+
+The `ls()` function, like `ls` in bash, lists the contents of the curent environment, probably the "global environment" . But your working environments is only part of what you have access to as an R programmer. There are other environments attached to your session, and you can see those environments by the results of `search()`.
+
+## What happens when you type `ls()`
+
+If you get help on this function with `?ls`, you will see that it's listed as belonging to the `base` namespace. Look back at the results of your search and you'll see a namespace called base. When you type `ls()`, the R interpreter searches along the list of environments, from the working environment down to the end of the list, for the first function called `ls()`. It then executes that function. 
+
+> ## Find out!
+>
+> Look at the output of `search()` again, and note the position of the base package. Now use that number in the `pos` argument of ls, e.g., `ls(pos=n)`. 
+>
+> > ## Solution
+> >
+> > ```{r}
+> > search()
+> > ls(pos=12)[680:690]
+> > ```
+> >
+> > The base package contains a *lot* of objects; I've shortened my
+> > results for display. But what you can see is that the 12th item in the
+> > search() list (the "base" package) contains a function called "ls".
+> > When you type "ls()" this is the function that runs.
+> {: .solution}
+{: .challenge}
+
+## Loading R packages into your namespaces
+
+R objects and functions come in packages. To add an installed package to your namespace, you must use the function `library()`. Try adding the lattice package to your namespace and see where it resides.
+
+```{r}
+library(lattice)
+search()
+```
+
+By default, `library()` loads packages into the second position of your search path, just behind your global environment. This means that the most recent packages loaded are found earliest, and thus given priority. `library()` has an argument to position the newly loaded package at any position.
+
+
+## Installing packages
+
+There are thousands of packages on [CRAN][cran], but until they are installed on your local computer, you can't load them into your namespace with `library()`. To install a package from CRAN, use `install.packages()` with the name of the package as a string.
+
+> ## Install the package "devtools" this way.
+> 
+> When you have installed devtools, you can confirm using the following
+> 
+> ```{r}
+> "devtools" %in% rownames(installed.packages())
+> ```
+{: .challenge}
+
+> ## Fully qualified namespaces
+> 
+> If you have *installed* but not *loaded* an R package, you can still refer to the functions and
+> objects available from the package. To do so, you have to use the *fully qualified* namespace for
+> the object or function. For example, if you wanted to use the `wireframe()` function from package
+> `lattice`, you could type `lattice::wireframe()`. So long as the package is *installed* it can be
+> used this way without loading it with `library()`. Using fully qualified names is helpful in
+> programming R scripts, to guarantee using the function from the correct package
+{: .callout}
+
+l{% include links.md %}
