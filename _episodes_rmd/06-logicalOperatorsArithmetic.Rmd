@@ -28,12 +28,13 @@ source("../bin/chunk-options.R")
 
 Basic arithmetic operations on numeric data use standard calculator symbols such as `+`,
 `-`, `*`, and `/` for addition, subtraction, multiplication and division
-respectively. Another operation that might be of interest is the *modulus*
-operator `%%`, which allows us to calculate the remainder of a division. For
-instance, and `%/%` which is integer division (without the remainder).
+respectively. Other operations that might be of interest include the *modulus*
+operator `%%`, which allows us to calculate the remainder of an integer division, for
+instance, and `%/%` which is integer division without the remainder.
 
 ```{r}
 5 %% 2
+5 %/% 2
 ```
 
 In order to raise a numeric value to a power, we simply use `^`. For example, 
@@ -60,7 +61,7 @@ b <- c(2,2,2,3,2)
 a %% b
 ```
 
-> ## Be careful when recycling!
+> ## Be careful about recycling!
 >
 > The element-wise nature of R operations has some unexpected implications. Consider the following: 
 >
@@ -82,6 +83,28 @@ a %% b
 > 1. An object of equal dimension;
 > 2. A vector of length one (that is, a single number);
 > 3. An object of different dimension? 
+>
+> > ## Solution
+> >
+> > ```{r}
+> > # let's create a 3x3 matrix of numbers from 1:9
+> > m <- matrix(1:9,nrow=3,byrow = TRUE)
+> > 
+> > m
+> >                                         # dividing by itself operates element-wise
+> > 
+> > m / m 
+> > 
+> > # dividing by a single number does what you might expect
+> > 
+> > m / 2
+> > 
+> > # dividing by a row or a column, in both cases, treats the second operand as a vector, and thus performs column-wise division
+> > 
+> > m / m[1,] # the second operator is a vector of the first row
+> > m / m[,1] # the second operator is a vector of the first row
+> > ```
+> {: .solution}
 {: .challenge}
 
 One commonly used arithmetic operation in bioinformatics is the log operation.
@@ -93,6 +116,15 @@ This can be done using the `log()` function.
 > using a different base?
 > 
 > *Hint: Use help(log) for more information on the log function.* 
+> > ## Solution
+> > 
+> > ```{r}
+> > args(log)
+> > ```
+> > The default is an argument called `base`, which defaults to `e`. This can be changed, for example, by
+> > `log(x,base=10)`
+> >
+> {: .solution}
 {: .challenge}
 
 ## Logical operators in R

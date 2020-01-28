@@ -27,9 +27,9 @@ source: Rmd
 
 Basic arithmetic operations on numeric data use standard calculator symbols such as `+`,
 `-`, `*`, and `/` for addition, subtraction, multiplication and division
-respectively. Another operation that might be of interest is the *modulus*
-operator `%%`, which allows us to calculate the remainder of a division. For
-instance, and `%/%` which is integer division (without the remainder).
+respectively. Other operations that might be of interest include the *modulus*
+operator `%%`, which allows us to calculate the remainder of an integer division, for
+instance, and `%/%` which is integer division without the remainder.
 
 
 ~~~
@@ -41,6 +41,20 @@ instance, and `%/%` which is integer division (without the remainder).
 
 ~~~
 [1] 1
+~~~
+{: .output}
+
+
+
+~~~
+5 %/% 2
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] 2
 ~~~
 {: .output}
 
@@ -95,7 +109,7 @@ a %% b
 ~~~
 {: .output}
 
-> ## Be careful when recycling!
+> ## Be careful about recycling!
 >
 > The element-wise nature of R operations has some unexpected implications. Consider the following: 
 >
@@ -134,6 +148,102 @@ a %% b
 > 1. An object of equal dimension;
 > 2. A vector of length one (that is, a single number);
 > 3. An object of different dimension? 
+>
+> > ## Solution
+> >
+> > 
+> > ~~~
+> > # let's create a 3x3 matrix of numbers from 1:9
+> > m <- matrix(1:9,nrow=3,byrow = TRUE)
+> > 
+> > m
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> >      [,1] [,2] [,3]
+> > [1,]    1    2    3
+> > [2,]    4    5    6
+> > [3,]    7    8    9
+> > ~~~
+> > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
+> >                                         # dividing by itself operates element-wise
+> > 
+> > m / m 
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> >      [,1] [,2] [,3]
+> > [1,]    1    1    1
+> > [2,]    1    1    1
+> > [3,]    1    1    1
+> > ~~~
+> > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
+> > # dividing by a single number does what you might expect
+> > 
+> > m / 2
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> >      [,1] [,2] [,3]
+> > [1,]  0.5  1.0  1.5
+> > [2,]  2.0  2.5  3.0
+> > [3,]  3.5  4.0  4.5
+> > ~~~
+> > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
+> > # dividing by a row or a column, in both cases, treats the second operand as a vector, and thus performs column-wise division
+> > 
+> > m / m[1,] # the second operator is a vector of the first row
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> >          [,1]     [,2] [,3]
+> > [1,] 1.000000 2.000000    3
+> > [2,] 2.000000 2.500000    3
+> > [3,] 2.333333 2.666667    3
+> > ~~~
+> > {: .output}
+> > 
+> > 
+> > 
+> > ~~~
+> > m / m[,1] # the second operator is a vector of the first row
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> >      [,1]     [,2]     [,3]
+> > [1,]    1 2.000000 3.000000
+> > [2,]    1 1.250000 1.500000
+> > [3,]    1 1.142857 1.285714
+> > ~~~
+> > {: .output}
+> {: .solution}
 {: .challenge}
 
 One commonly used arithmetic operation in bioinformatics is the log operation.
@@ -145,6 +255,25 @@ This can be done using the `log()` function.
 > using a different base?
 > 
 > *Hint: Use help(log) for more information on the log function.* 
+> > ## Solution
+> > 
+> > 
+> > ~~~
+> > args(log)
+> > ~~~
+> > {: .language-r}
+> > 
+> > 
+> > 
+> > ~~~
+> > function (x, base = exp(1)) 
+> > NULL
+> > ~~~
+> > {: .output}
+> > The default is an argument called `base`, which defaults to `e`. This can be changed, for example, by
+> > `log(x,base=10)`
+> >
+> {: .solution}
 {: .challenge}
 
 ## Logical operators in R
