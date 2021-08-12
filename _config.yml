@@ -3,9 +3,11 @@
 #------------------------------------------------------------
 
 # Overall title for pages.
-title: "LSM3241 Genomic Data Analysis: Introduction to R"
-
+# title: "LSM3241 Genomic Data Analysis: Introduction to R"
 module: "Genomic Data Analysis"
+
+title: "Introduction to R"
+
 
 # Life cycle stage of the lesson
 # possible values: "pre-alpha", "alpha", "beta", "stable"
@@ -31,7 +33,7 @@ cc_by_human: "https://creativecommons.org/licenses/by/4.0/"
 
 
 # Start time in minutes (0 to be clock-independent, 540 to show a start at 09:00 am).
-start_time: 840
+start_time: 1080
 
 plugins:
   - jekyll-remote-theme
