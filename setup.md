@@ -6,7 +6,7 @@ title: Setup
 
 The [R project for statistical computing][r-lang] provides the R programming enviornment, which you can download and install at the link. The R language is supported by an library of software, the [Comprehensive R Archive Network][cran], or CRAN, from which you can download both R and R language packages.
 
-**R should already be installed on your computer in the laboratory. To confirm, please type `R`<kbd>enter</kbd> at the bash command prompt.**
+**If you are using the laboratory computers, R should already be installed.  To confirm, please type `R`<kbd>enter</kbd> at the bash command prompt.**
 
 > ## Ubuntu Linux using `apt`
 > 
@@ -28,5 +28,7 @@ You can use R by itself, or you can use RStudio, an integrated environment for R
 
 **R should already be installed on your computer in the laboratory. To confirm, please try running RStudio from the Ubuntu launcher**
 
+
+## Both R and RStudio run on all platforms (Windows, MacOSX, and Linux).
 
 {% include links.md %}
