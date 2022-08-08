@@ -68,7 +68,7 @@ other choices.
 - Code written in R runs much slower than code written in C or Java. (However, writing
   code usually takes much longer than running it, so this is often not a concern).
 - R has a somewhat quirky language syntax, and is sometimes seen as an inconsistent
-  language. R is often accused of violating the [Principle of least astonishment](https://en.wikipedia.org/wiki/Principle_of_least_astonishment).
+  language. R is often accused of violating the [Principle of Least Astonishment](https://en.wikipedia.org/wiki/Principle_of_least_astonishment).
   
 
 

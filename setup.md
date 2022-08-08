@@ -4,9 +4,17 @@ title: Setup
 
 ## Install R if needed
 
-The [R project for statistical computing][r-lang] provides the R programming enviornment, which you can download and install at the link. The R language is supported by an library of software, the [Comprehensive R Archive Network][cran], or CRAN, from which you can download both R and R language packages.
+The [R project for statistical computing][r-lang] provides the R programming enviornment, which you can download and install at the link. The R language is supported by an library of software, the [Comprehensive R archive network][cran], or CRAN, from which you can download both R and R language packages.
 
-**If you are using the laboratory computers, R should already be installed.  To confirm, please type `R`<kbd>enter</kbd> at the bash command prompt.**
+### Different installation for different operating systems
+
+**Both R and RStudio run on all platforms (Windows, MacOSX, and Linux)**
+
+R (the language) and RStudio (the integrated development environment) are available on all major operating systems, including Windows, MacOSX, and Linux. The exact installation procedures will differ depending on which version you use for installation.
+
+MacOSX is more "Linux-like" than Windows, and some aspects of working with R may be easier on a Mac than on a Windows computer. That said, if you are using Windows, you can install the Windows Subsystem for Linux (WSL) and you will get a Linux system working natively on your Windows computer. If you are using Windows 11 and install the latest Ubuntu version of Linux (22.04) in your WSL installation, Linux graphics will run natively on your Windows computer.
+
+**If you are using the laboratory computers, R and R Studio should already be installed**
 
 > ## Ubuntu Linux using `apt`
 > 
@@ -22,13 +30,9 @@ The [R project for statistical computing][r-lang] provides the R programming env
 > You need to use `sudo` for this command because installing software using apt requires administrator privileges. You will be prompted for an administrator (privileged) password.
 {: .linux}
 
-## Install RStudio if needed
+## Install RStudio
 
-You can use R by itself, or you can use RStudio, an integrated environment for R programming. To install RStudio go to [The RStudio web site][rstudio]and follow the instructions.
-
-**R should already be installed on your computer in the laboratory. To confirm, please try running RStudio from the Ubuntu launcher**
-
-
-## Both R and RStudio run on all platforms (Windows, MacOSX, and Linux).
+You can use R by itself, or you can use RStudio, an integrated environment for R programming. We highly recommend using RStudio! To install RStudio go to [The RStudio web site][rstudio]and follow the instructions.
 
 {% include links.md %}
+{% include site-links.md %}

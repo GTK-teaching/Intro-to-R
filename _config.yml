@@ -4,8 +4,7 @@
 
 # Overall title for pages.
 # title: "LSM3241 Genomic Data Analysis: Introduction to R"
-module: "Genomic Data Analysis"
-
+module: "BL5631 Applied Analysis of Genomic Data in R"
 title: "Introduction to R"
 
 
@@ -31,9 +30,8 @@ email: "dbsgtk@nus.edu.sg"
 
 cc_by_human: "https://creativecommons.org/licenses/by/4.0/"
 
-
 # Start time in minutes (0 to be clock-independent, 540 to show a start at 09:00 am).
-start_time: 840
+start_time: 1080
 
 plugins:
   - jekyll-remote-theme
