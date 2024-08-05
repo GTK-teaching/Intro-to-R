@@ -8,7 +8,7 @@ source: Rmd
 output: 
   html_document:
     fig_caption: yes
-teaching: 5
+teaching: 15
 exercises: 5
 objectives:
 - "Understand and describe two ways of using R interactively: The R console and RStudio"

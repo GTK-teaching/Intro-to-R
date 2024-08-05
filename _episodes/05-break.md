@@ -1,7 +1,7 @@
 ---
 layout: break
 title: coffee break
-break: 10
+break: 15
 ---
 
 # Let's take a short break 

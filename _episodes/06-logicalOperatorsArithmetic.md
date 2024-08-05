@@ -3,7 +3,7 @@
 # Instead, please edit 06-logicalOperatorsArithmetic.md in _episodes_rmd/
 title: Logical and arithmetic operations
 teaching: 10
-exercises: 5
+exercises: 10
 questions: 
    - How do we do mathematical operations in R?
    - How can we use R to check for different conditions?

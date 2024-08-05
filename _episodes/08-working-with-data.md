@@ -3,7 +3,7 @@
 # Instead, please edit 08-working-with-data.md in _episodes_rmd/
 title: "Working with data" 
 teaching: 10
-exercises: 10
+exercises: 20
 questions:
 - "How can we calculate the mean and standard deviation of a dataset?"
 - "How do we quantify how correlated two variables are in R?"

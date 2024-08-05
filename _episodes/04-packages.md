@@ -8,8 +8,8 @@ source: Rmd
 output: 
   html_document:
     fig_caption: yes
-teaching: 5
-exercises: 5
+teaching: 10
+exercises: 10
 objectives:
 - "Be able to identify installed packages and install new packages in R"
 - "Distinguish between namespaces and packages"
