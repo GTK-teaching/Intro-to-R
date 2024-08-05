@@ -8,8 +8,8 @@ source: Rmd
 output: 
   html_document:
     fig_caption: yes
-teaching: 20
-exercises: 10
+teaching: 10
+exercises: 15
 objectives:
 - "Use basic R syntax to create variables, inspect functions, and write functions"
 - "Understand the use of parameters in functions, including named parameters and default parameters"
