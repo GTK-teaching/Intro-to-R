@@ -1,9 +1,9 @@
 ---
 layout: break
-title: coffee break
-break: 15
+title: Lunch
+break: 60
 ---
 
-# Let's take a short break 
+# Let's take a lunch break
 
 {% include links.md %}

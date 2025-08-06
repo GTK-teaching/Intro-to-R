@@ -9,6 +9,11 @@ gem "jekyll", "~> 4.2.0"
 
 gem "jekyll-remote-theme"
 
+gem "csv"
+gem "logger"
+gem "base64"
+gem "bigdecimal"
+gem "webrick"
 gem "jekyll-paginate"
 
 gem "jekyll-sitemap"
