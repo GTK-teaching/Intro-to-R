@@ -14,6 +14,11 @@ gem "webrick"
 gem "base64"
 gem "jekyll-remote-theme"
 
+gem "csv"
+gem "logger"
+gem "base64"
+gem "bigdecimal"
+gem "webrick"
 gem "jekyll-paginate"
 
 gem "jekyll-sitemap"
