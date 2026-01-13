@@ -7,6 +7,11 @@ source "https://rubygems.org"
 # gem "jekyll", "~> 3.8.5"
 gem "jekyll", "~> 4.2.0"
 
+gem "logger"
+gem "csv"
+gem "bigdecimal"
+gem "webrick"
+gem "base64"
 gem "jekyll-remote-theme"
 
 gem "jekyll-paginate"
