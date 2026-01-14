@@ -9,7 +9,7 @@ output:
   html_document:
     fig_caption: yes
 teaching: 10
-exercises: 15
+exercises: 5
 objectives:
 - "Use basic R syntax to create variables, inspect functions, and write functions"
 - "Understand the use of parameters in functions, including named parameters and default parameters"
@@ -204,14 +204,14 @@ args(round)
 
 
 ~~~
-function (x, digits = 0) 
+function (x, digits = 0, ...) 
 NULL
 ~~~
 {: .output}
 
 > ## An exercise
 >
-> Assume the haploid human genome is 3.1Mb. The average molecular weight of a base pair is 660g/mol.  Estimate the weight of DNA in a human cell in picograms, rounded to three digits.
+> Assume the haploid human genome is 3.1Gb. The average molecular weight of a base pair is 660g/mol.  Estimate the weight of DNA in a human cell in picograms, rounded to three digits.
 >
 > > ## Solution
 > >

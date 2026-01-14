@@ -106,7 +106,7 @@ args(round)
 
 > ## An exercise
 >
-> Assume the haploid human genome is 3.1Mb. The average molecular weight of a base pair is 660g/mol.  Estimate the weight of DNA in a human cell in picograms, rounded to three digits.
+> Assume the haploid human genome is 3.1Gb. The average molecular weight of a base pair is 660g/mol.  Estimate the weight of DNA in a human cell in picograms, rounded to three digits.
 >
 > > ## Solution
 > >
