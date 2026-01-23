@@ -5,7 +5,9 @@ source "https://rubygems.org"
 # file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
 
 # gem "jekyll", "~> 3.8.5"
-gem "jekyll", "~> 4.2.0"
+gem "jekyll", "~> 4.3.0"
+gem "jekyll-sass-converter", "~> 3.0"
+gem "sass-embedded", "~> 1.58.0"
 
 gem "logger"
 gem "csv"
@@ -13,12 +15,6 @@ gem "bigdecimal"
 gem "webrick"
 gem "base64"
 gem "jekyll-remote-theme"
-
-gem "csv"
-gem "logger"
-gem "base64"
-gem "bigdecimal"
-gem "webrick"
 gem "jekyll-paginate"
 
 gem "jekyll-sitemap"
